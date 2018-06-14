@@ -80,3 +80,31 @@ from django.utils import timezone
 
 expired_at = fake.date_time(tzinfo=timezone.utc)
 ```
+
+## django-filter
+
+```
+class MemberFilterSet(filters.FilterSet):
+    ORDER_BY_CHOICES = (("date", "date"),
+                        ("-date", "date reverse"),                       ("time_in", "time_in"),
+                        ("-time_in", "time_in reverse"),
+                        ("time_out", "time_out"),
+                        ("-time_out", "time_out reverse"))
+
+    search = filters.CharFilter(method="fuzzy_search",
+                                help_text="fuzzy search, "
+                                          "search for member name, member_id and email")
+    name = filters.CharFilter(lookup_expr="icontains")
+    is_active = filters.BooleanFilter()
+    group = filters.CharFilter(name="groups__id")
+    order_by = serializers.ChoiceField(default="-date", choices=ORDER_BY_CHOICES)
+    
+
+    class Meta:
+        model = Member
+        fields = []
+
+    def fuzzy_search(self, queryset, name, value):  # pylint: disable=unused-argument
+        q = Q(name__icontains=value) | Q(member_id__icontains=value) | Q(email__icontains=value)
+        return queryset.filter(q).all()
+```
