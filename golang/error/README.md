@@ -8,6 +8,8 @@
 - [What I Don’t Like About Error Handling in Go, and How to Work Around It](https://opencredo.com/why-i-dont-like-error-handling-in-go/)
 - [My Go Resolutions for 2017](https://research.swtch.com/go2017)
 - [Errors are values](https://blog.golang.org/errors-are-values)
+- [Don’t just check errors, handle them gracefully](https://dave.cheney.net/2016/04/27/dont-just-check-errors-handle-them-gracefully)
+
 ### Packages
 
 - [errors](https://github.com/pkg/errors)
