@@ -53,6 +53,9 @@ Plug 'jparise/vim-graphql'
 " https://github.com/preservim/nerdcommenter
 Plug 'preservim/nerdcommenter'
 
+" https://github.com/easymotion/vim-easymotion
+Plug 'easymotion/vim-easymotion'
+
 " Initialize plugin system
 call plug#end()
 
@@ -62,7 +65,9 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 " --------------------------------------
 " basic config
 " --------------------------------------
- let mapleader = ";"
+let mapleader = ";"
+
+inoremap jk <esc>
 
  "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -119,12 +124,14 @@ set noswapfile
 " Use spaces instead of tabs
 set expandtab
 
+
 " Be smart when using tabs ;)
 set smarttab
 
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
+" set autoindent
 
 " Linebreak on 500 characters
 set lbr
@@ -397,7 +404,7 @@ autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " coc-python
 " 
 " +++++++++++++++++
-let g:python3_host_prog = '/Users/ysun/.pyenv/versions/3.8.2/bin/python'
+let g:python3_host_prog = '/Users/sunyu/.pyenv/versions/3.8.2/bin/python'
 " Add missing imports on save
 autocmd BufWritePre *.py :call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd BufWritePre *.py :call CocAction('format')
@@ -556,4 +563,13 @@ let g:NERDTrimTrailingWhitespace = 1
 let g:NERDToggleCheckAllLines = 1
 " --------------------------------------
 " nerdcommenter config
+" --------------------------------------
+" --------------------------------------
+" easymotion config
+" --------------------------------------
+map <Leader><leader>h <Plug>(easymotion-linebackward)
+map <Leader><leader>l <Plug>(easymotion-lineforward)
+map <Leader><leader>. <Plug>(easymotion-repeat)
+" --------------------------------------
+" easymotion config
 " --------------------------------------
