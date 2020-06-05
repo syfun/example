@@ -404,7 +404,7 @@ autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " coc-python
 " 
 " +++++++++++++++++
-let g:python3_host_prog = '/Users/sunyu/.pyenv/versions/3.8.2/bin/python'
+let g:python3_host_prog = '$HOME/.pyenv/versions/3.8.2/bin/python'
 " Add missing imports on save
 autocmd BufWritePre *.py :call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd BufWritePre *.py :call CocAction('format')
