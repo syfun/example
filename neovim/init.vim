@@ -56,16 +56,30 @@ Plug 'preservim/nerdcommenter'
 " https://github.com/easymotion/vim-easymotion
 Plug 'easymotion/vim-easymotion'
 
+" https://github.com/liuchengxu/vim-which-key
+Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
+
 " Initialize plugin system
 call plug#end()
 
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
+
+"--------
+" vim-which-key
+" ---------
+let g:mapleader = "\<Space>"
+let g:maplocalleader = ','
+nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
+nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+" " By default timeoutlen is 1000 ms
+set timeoutlen=500
+
 " --------------------------------------
 " basic config
 " --------------------------------------
-let mapleader = ";"
+" let mapleader = ";"
 
 inoremap jk <esc>
 
