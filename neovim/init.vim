@@ -69,12 +69,71 @@ autocmd FileType json syntax match Comment +\/\/.\+$+
 "--------
 " vim-which-key
 " ---------
+autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
 let g:mapleader = "\<Space>"
-let g:maplocalleader = ','
+" let g:maplocalleader = ','
+" By default timeoutlen is 1000 ms
+set timeoutlen=500
+
+let g:which_key_map = {}
+
+" file related
+nnoremap <silent> <leader>fs :update<CR>
+nnoremap <silent> <leader>fd :e $HOME/.config/nvim/init.vim<CR>
+let g:which_key_map.f = { 
+    \ 'name' : '+file',
+    \ 's': ['update', 'save-file'],
+    \ 'd': 'open-init-vim'
+    \ }
+
+
+" window related
+nnoremap <silent> <leader>wh <C-W>h<CR>
+nnoremap <silent> <leader>wj <C-W>j<CR>
+nnoremap <silent> <leader>wk <C-W>k<CR>
+nnoremap <silent> <leader>wl <C-W>l<CR>
+
+
+let g:which_key_map.w = {
+      \ 'name' : '+windows' ,
+      \ 'w' : ['<C-W>w'     , 'other-window']          ,
+      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
+      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
+      \ '|' : ['<C-W>v'     , 'split-window-right']    ,
+      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
+      \ 'h' : ['<C-W>h'     , 'window-left']           ,
+      \ 'j' : ['<C-W>j'     , 'window-below']          ,
+      \ 'l' : ['<C-W>l'     , 'window-right']          ,
+      \ 'k' : ['<C-W>k'     , 'window-up']             ,
+      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
+      \ 'J' : ['resize +5'  , 'expand-window-below']   ,
+      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
+      \ 'K' : ['resize -5'  , 'expand-window-up']      ,
+      \ '=' : ['<C-W>='     , 'balance-window']        ,
+      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
+      \ 'v' : ['<C-W>v'     , 'vsplit-window-right']    ,
+      \ '?' : ['Windows'    , 'fzf-window']            ,
+      \ }
+
+
+" buffer related
+nnoremap <silent> <leader>1 :b1<CR>
+nnoremap <silent> <leader>2 :b2<CR>
+let g:which_key_map.b = {
+      \ 'name' : '+buffer' ,
+      \ '1' : ['b1'        , 'buffer 1']        ,
+      \ '2' : ['b2'        , 'buffer 2']        ,
+      \ 'd' : ['bd'        , 'delete-buffer']   ,
+      \ 'f' : ['bfirst'    , 'first-buffer']    ,
+      \ 'h' : ['Startify'  , 'home-buffer']     ,
+      \ 'l' : ['blast'     , 'last-buffer']     ,
+      \ 'n' : ['bnext'     , 'next-buffer']     ,
+      \ 'p' : ['bprevious' , 'previous-buffer'] ,
+      \ '?' : ['Buffers'   , 'fzf-buffer']      ,
+      \ }
+
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
-" " By default timeoutlen is 1000 ms
-set timeoutlen=500
 
 " --------------------------------------
 " basic config
@@ -103,18 +162,12 @@ syntax on
 colorscheme onedark
 
 " Fast saving
-nmap <leader>w :w!<cr>
+" nmap <leader>w :w!<cr>
 
 " :W sudo saves the file 
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
-
- " Smart way to move between windows
- map <C-j> <C-W>j
- map <C-k> <C-W>k
- map <C-h> <C-W>h
- map <C-l> <C-W>l
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
@@ -329,8 +382,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -538,8 +591,8 @@ endfunction
 let g:ctrlp_working_path_mode = 0
 
 let g:ctrlp_map = '<c-p>'
-map <leader>j :CtrlP<cr>
-map <leader>b :CtrlPBuffer<cr>
+"map <leader>j :CtrlP<cr>
+"map <leader>b :CtrlPBuffer<cr>
 
 let g:ctrlp_max_height = 20
 let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
