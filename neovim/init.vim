@@ -99,6 +99,18 @@ nnoremap <silent> <leader>wl <C-W>l<CR>
 nnoremap <silent> q  :<c-u>q<CR>
 nnoremap <silent> qa  :<c-u>qall!<CR>
 
+" move to window by number
+let i = 1
+while i <= 8
+    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+    let i = i + 1
+endwhile
+
+let i = 1
+while i <= 5
+    execute 'nnoremap t' . i . ' :' . i . 'tabn<CR>'
+    let i = i + 1
+endwhile
 
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
@@ -122,11 +134,6 @@ let g:which_key_map.w = {
       \ }
 
 
-let i = 1
-while i <= 9
-    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
-    let i = i + 1
-endwhile
 
 " buffer related
 " nnoremap <silent> <leader>1 :b1<CR>
