@@ -75,7 +75,11 @@ let g:mapleader = "\<Space>"
 " By default timeoutlen is 1000 ms
 set timeoutlen=500
 
-let g:which_key_map = {}
+" let g:which_key_map = {}
+let g:which_key_map = {
+    \ 'name': 'space root'
+    \ }
+
 
 " file related
 nnoremap <silent> <leader>fs :update<CR>
@@ -92,6 +96,8 @@ nnoremap <silent> <leader>wh <C-W>h<CR>
 nnoremap <silent> <leader>wj <C-W>j<CR>
 nnoremap <silent> <leader>wk <C-W>k<CR>
 nnoremap <silent> <leader>wl <C-W>l<CR>
+nnoremap <silent> q  :<c-u>q<CR>
+nnoremap <silent> qa  :<c-u>qall!<CR>
 
 
 let g:which_key_map.w = {
@@ -116,9 +122,15 @@ let g:which_key_map.w = {
       \ }
 
 
+let i = 1
+while i <= 9
+    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+    let i = i + 1
+endwhile
+
 " buffer related
-nnoremap <silent> <leader>1 :b1<CR>
-nnoremap <silent> <leader>2 :b2<CR>
+" nnoremap <silent> <leader>1 :b1<CR>
+" nnoremap <silent> <leader>2 :b2<CR>
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
       \ '1' : ['b1'        , 'buffer 1']        ,
@@ -270,15 +282,25 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
+
+function! WindowNumber()
+    let str=tabpagewinnr(tabpagenr())
+    return str
+endfunction
+
 let g:lightline = {
       \ 'colorscheme': 'onedark',
       \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
+      \   'left': [ [ 'winnumber', 'mode', 'paste' ],
       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
       \ },
+      \ 'inactive': {
+      \   'left': [ [ 'winnumber', 'mode'] ]
+      \},
       \ 'component_function': {
       \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
+      \   'currentfunction': 'CocCurrentFunction',
+      \   'winnumber': 'WindowNumber'
       \ },
       \ }
 " --------------------------------------
