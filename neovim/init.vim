@@ -73,7 +73,7 @@ autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map'
 let g:mapleader = "\<Space>"
 " let g:maplocalleader = ','
 " By default timeoutlen is 1000 ms
-set timeoutlen=500
+set timeoutlen=200
 
 " let g:which_key_map = {}
 let g:which_key_map = {
@@ -151,8 +151,20 @@ let g:which_key_map.b = {
       \ '?' : ['Buffers'   , 'fzf-buffer']      ,
       \ }
 
+let g:which_key_map['j'] = {
+      \ 'name' : '+jump/json'                   ,
+      \ 'j' : 'easymotion-goto-char'       ,
+      \ 'J' : 'easymotion-goto-char-2'     ,
+      \ 'l' : 'jump-linewise'              ,
+      \ 'w' : 'jump-to-word-bidirectional' ,
+      \ 'f' : 'jump-forward-wordwise'      ,
+      \ 'b' : 'jump-backword-wordwise'     ,
+      \ 'F' : ['execute line(".")."!python -m json.tool"', 'format-current-raw-oneline-json'],
+      \ }
+
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
+vnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 
 " --------------------------------------
 " basic config
@@ -212,7 +224,7 @@ set expandtab
 
 
 " Be smart when using tabs ;)
-set smarttab
+
 
 " 1 tab == 4 spaces
 set shiftwidth=4
@@ -460,25 +472,25 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 " +++++++++++++++++
 " golang  
@@ -663,9 +675,23 @@ let g:NERDToggleCheckAllLines = 1
 " --------------------------------------
 " easymotion config
 " --------------------------------------
-map <Leader><leader>h <Plug>(easymotion-linebackward)
-map <Leader><leader>l <Plug>(easymotion-lineforward)
-map <Leader><leader>. <Plug>(easymotion-repeat)
+map <Leader>j. <Plug>(easymotion-repeat)
+map <Leader>jl <Plug>(easymotion-lineforward)
+map <Leader>jj <Plug>(easymotion-j)
+map <Leader>jk <Plug>(easymotion-k)
+map <Leader>jh <Plug>(easymotion-linebackward)
+map <leader>jn <Plug>(easymotion-n)
+map <leader>js <Plug>(easymotion-s)
+map <leader>jw <Plug>(easymotion-w)
+map <leader>jb <Plug>(easymotion-b)
 " --------------------------------------
 " easymotion config
 " --------------------------------------
+
+" autocmd BufWritePost $HOME/.config/nvim/init.vim source $HOME/.config/nvim/init.vim
+
+" line
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>0
+nnoremap g9 $
+
