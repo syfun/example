@@ -24,28 +24,20 @@ Plug 'kristijanhusak/defx-git'
 " https://github.com/kristijanhusak/defx-icons
 Plug 'kristijanhusak/defx-icons'
 
-" -------------
-" theme
-
 " https://github.com/joshdick/onedark.vim
 Plug 'joshdick/onedark.vim'
 
 " https://github.com/morhetz/gruvbox
-" Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 
 " https://github.com/itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
-" --------------
 
-"
+" https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
-
 
 " Language server protocol support
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" https://github.com/ctrlpvim/ctrlp.vim
-Plug 'ctrlpvim/ctrlp.vim'
 
 " https://github.com/jparise/vim-graphql
 Plug 'jparise/vim-graphql'
@@ -59,16 +51,28 @@ Plug 'easymotion/vim-easymotion'
 " https://github.com/liuchengxu/vim-which-key
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
+" https://github.com/terryma/vim-multiple-cursors
+Plug 'terryma/vim-multiple-cursors'
+
+" https://github.com/jiangmiao/auto-pairs
+Plug 'jiangmiao/auto-pairs'
+
+" https://github.com/sheerun/vim-polyglot
+Plug 'sheerun/vim-polyglot'
+
+" https://github.com/Yggdroot/LeaderF
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+
+" https://github.com/tpope/vim-fugitive
+Plug 'tpope/vim-fugitive'
+
+
 " Initialize plugin system
 call plug#end()
 
-
-autocmd FileType json syntax match Comment +\/\/.\+$+
-
-
-"--------
+" ---------------------
 " vim-which-key
-" ---------
+" ---------------------
 autocmd! User vim-which-key call which_key#register('<Space>', 'g:which_key_map')
 let g:mapleader = "\<Space>"
 " let g:maplocalleader = ','
@@ -80,37 +84,11 @@ let g:which_key_map = {
     \ 'name': 'space root'
     \ }
 
-
-" file related
-nnoremap <silent> <leader>fs :update<CR>
-nnoremap <silent> <leader>fd :e $HOME/.config/nvim/init.vim<CR>
 let g:which_key_map.f = { 
     \ 'name' : '+file',
     \ 's': ['update', 'save-file'],
     \ 'd': 'open-init-vim'
     \ }
-
-
-" window related
-nnoremap <silent> <leader>wh <C-W>h<CR>
-nnoremap <silent> <leader>wj <C-W>j<CR>
-nnoremap <silent> <leader>wk <C-W>k<CR>
-nnoremap <silent> <leader>wl <C-W>l<CR>
-nnoremap <silent> q  :<c-u>q<CR>
-nnoremap <silent> qa  :<c-u>qall!<CR>
-
-" move to window by number
-let i = 1
-while i <= 8
-    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
-    let i = i + 1
-endwhile
-
-let i = 1
-while i <= 5
-    execute 'nnoremap t' . i . ' :' . i . 'tabn<CR>'
-    let i = i + 1
-endwhile
 
 let g:which_key_map.w = {
       \ 'name' : '+windows' ,
@@ -133,11 +111,6 @@ let g:which_key_map.w = {
       \ '?' : ['Windows'    , 'fzf-window']            ,
       \ }
 
-
-
-" buffer related
-" nnoremap <silent> <leader>1 :b1<CR>
-" nnoremap <silent> <leader>2 :b2<CR>
 let g:which_key_map.b = {
       \ 'name' : '+buffer' ,
       \ '1' : ['b1'        , 'buffer 1']        ,
@@ -169,7 +142,42 @@ vnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 " --------------------------------------
 " basic config
 " --------------------------------------
-" let mapleader = ";"
+set clipboard=unnamed,unnamedplus
+set fileencodings=utf-8,gb2312
+set foldlevel=99
+set foldmethod=indent
+
+autocmd FileType json syntax match Comment +\/\/.\+$+
+
+" line
+inoremap <C-e> <C-o>$
+inoremap <C-a> <C-o>0
+nnoremap g9 $
+
+" file related
+nnoremap <silent> <leader>fs :update<CR>
+nnoremap <silent> <leader>fd :e $HOME/.config/nvim/init.vim<CR>
+
+" window related
+nnoremap <silent> <leader>wh <C-W>h<CR>
+nnoremap <silent> <leader>wj <C-W>j<CR>
+nnoremap <silent> <leader>wk <C-W>k<CR>
+nnoremap <silent> <leader>wl <C-W>l<CR>
+nnoremap <silent> q  :<c-u>q<CR>
+nnoremap <silent> qa  :<c-u>qall!<CR>
+
+" move to window by number
+let i = 1
+while i <= 8
+    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+    let i = i + 1
+endwhile
+
+let i = 1
+while i <= 5
+    execute 'nnoremap t' . i . ' :' . i . 'tabn<CR>'
+    let i = i + 1
+endwhile
 
 inoremap jk <esc>
 
@@ -190,7 +198,8 @@ if (empty($TMUX))
 endif
 
 syntax on
-colorscheme onedark
+" colorscheme onedark
+colorscheme gruvbox
 
 " Fast saving
 " nmap <leader>w :w!<cr>
@@ -206,26 +215,15 @@ set encoding=utf8
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Files, backups and undo
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
 set noswapfile
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Text, tab and indent related
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use spaces instead of tabs
 set expandtab
 
-
 " Be smart when using tabs ;)
-
-
 " 1 tab == 4 spaces
 set shiftwidth=4
 set tabstop=4
@@ -245,6 +243,8 @@ set number
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
 " Close all the buffers
+" nnoremap <silent> <leader>1 :b1<CR>
+" nnoremap <silent> <leader>2 :b2<CR>
 map <leader>ba :bufdo bd<cr>
 
 map <leader>l :bnext<cr>
@@ -280,19 +280,10 @@ endtry
 " Return to last edit position when opening files (You want this!)
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-
-
-" --------------------------------------
-" basic config
-" --------------------------------------
-
 " --------------------------------------
 " onedark config
 " --------------------------------------
 let g:onedark_hide_endofbuffer = 1
-" --------------------------------------
-" onedark config
-" --------------------------------------
 
 " --------------------------------------
 " lightline config
@@ -322,14 +313,9 @@ let g:lightline = {
       \   'winnumber': 'WindowNumber'
       \ },
       \ }
-" --------------------------------------
-" lightline config
-" --------------------------------------
-
 
 " --------------------------------------
 " coc.nvim config
-" coc-go, coc-json, coc-python, coc-pairs
 " --------------------------------------
 function! SetupCommandAbbrs(from, to)
   exec 'cnoreabbrev <expr> '.a:from
@@ -337,11 +323,11 @@ function! SetupCommandAbbrs(from, to)
         \ .'? ("'.a:to.'") : ("'.a:from.'"))'
 endfunction
 
-" map <Esc> to exit terminal mode
-tnoremap <Esc> <C-\><C-n>
-
 " Use C to open coc config
 " call SetupCommandAbbrs('C', 'CocConfig')
+
+" map <Esc> to exit terminal mode
+tnoremap <Esc> <C-\><C-n>
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -495,7 +481,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " +++++++++++++++++
 " golang  
 " coc-go
-" https://github.com/josa42/coc-go
 " +++++++++++++++++
 " Add missing imports on save
 autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
@@ -510,7 +495,6 @@ autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " +++++++++++++++++
 " python  
 " coc-python
-" 
 " +++++++++++++++++
 let g:python3_host_prog = '$HOME/.pyenv/versions/3.8.2/bin/python'
 " Add missing imports on save
@@ -519,14 +503,8 @@ autocmd BufWritePre *.py :call CocAction('format')
 
 
 " --------------------------------------
-" coc.nvim config
-" --------------------------------------
-
-
-" +++++++++++++++++
 " Shougo/defx.nvim
-" https://github.com/Shougo/defx.nvim
-" +++++++++++++++++
+" --------------------------------------
 nmap <silent> <Leader>e :Defx <cr>
 
 let g:maplocalleader=';'
@@ -627,25 +605,9 @@ function! s:defx_my_settings() abort
 endfunction
 
 " --------------------------------------
-" ctrlp config
-" --------------------------------------
-let g:ctrlp_working_path_mode = 0
-
-let g:ctrlp_map = '<c-p>'
-map <leader>fj :CtrlP<cr>
-map <leader>fb :CtrlPBuffer<cr>
-
-let g:ctrlp_max_height = 20
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
-
-" --------------------------------------
-" ctrlp config
-" --------------------------------------
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => surround.vim config
+" surround.vim config
 " Annotate strings with gettext 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" --------------------------------------
 vmap Si S(i_<esc>f)
 au FileType mako vmap Si S"i${ _(<esc>2f"a) }<esc>
 
@@ -669,9 +631,7 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not 
 let g:NERDToggleCheckAllLines = 1
-" --------------------------------------
-" nerdcommenter config
-" --------------------------------------
+
 " --------------------------------------
 " easymotion config
 " --------------------------------------
@@ -684,14 +644,12 @@ map <leader>jn <Plug>(easymotion-n)
 map <leader>js <Plug>(easymotion-s)
 map <leader>jw <Plug>(easymotion-w)
 map <leader>jb <Plug>(easymotion-b)
-" --------------------------------------
-" easymotion config
-" --------------------------------------
 
-" autocmd BufWritePost $HOME/.config/nvim/init.vim source $HOME/.config/nvim/init.vim
 
-" line
-inoremap <C-e> <C-o>$
-inoremap <C-a> <C-o>0
-nnoremap g9 $
-
+" LeaderF
+let g:Lf_CommandMap = {'<c-j>': ['<c-n>'], '<c-k>': ['<c-p>'], '<down>': ['<c-j>'], '<up>': ['<c-k>'], '<c-p>': ['<c-l>']}
+let g:Lf_PreviewInPopup = 1
+let g:Lf_ShortcutB = "<c-e>"
+let g:Lf_ShortcutF = "<c-p>"
+let g:Lf_ShowDevIcons = 0
+let g:Lf_WindowPosition = 'popup'
