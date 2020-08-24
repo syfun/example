@@ -303,7 +303,7 @@ function! WindowNumber()
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'ondedark',
+      \ 'colorscheme': 'onedark',
       \ 'active': {
       \   'left': [ [ 'winnumber', 'mode', 'paste' ],
       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
