@@ -51,8 +51,8 @@ Plug 'easymotion/vim-easymotion'
 " https://github.com/liuchengxu/vim-which-key
 Plug 'liuchengxu/vim-which-key', { 'on': ['WhichKey', 'WhichKey!'] }
 
-" https://github.com/terryma/vim-multiple-cursors
-Plug 'terryma/vim-multiple-cursors'
+" https://github.com/mg979/vim-visual-multi
+Plug 'mg979/vim-visual-multi'
 
 " https://github.com/jiangmiao/auto-pairs
 Plug 'jiangmiao/auto-pairs'
