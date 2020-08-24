@@ -66,7 +66,6 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " https://github.com/tpope/vim-fugitive
 Plug 'tpope/vim-fugitive'
 
-
 " Initialize plugin system
 call plug#end()
 
@@ -148,6 +147,9 @@ set foldlevel=99
 set foldmethod=indent
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
+if has("autocmd")                                                          
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif                                                        
+endif
 
 " line
 inoremap <C-e> <C-o>$
@@ -198,8 +200,9 @@ if (empty($TMUX))
 endif
 
 syntax on
-" colorscheme onedark
-colorscheme gruvbox
+colorscheme onedark
+" colorscheme gruvbox
+" set background=light   " Setting light mode
 
 " Fast saving
 " nmap <leader>w :w!<cr>
@@ -238,6 +241,7 @@ set si "Smart indent
 set wrap "Wrap lines
 
 set number
+set relativenumber
 
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
@@ -299,7 +303,7 @@ function! WindowNumber()
 endfunction
 
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'ondedark',
       \ 'active': {
       \   'left': [ [ 'winnumber', 'mode', 'paste' ],
       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
