@@ -28,7 +28,7 @@ Plug 'kristijanhusak/defx-icons'
 Plug 'joshdick/onedark.vim'
 
 " https://github.com/morhetz/gruvbox
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
 
 " https://github.com/itchyny/lightline.vim
 Plug 'itchyny/lightline.vim'
@@ -147,9 +147,6 @@ set foldlevel=99
 set foldmethod=indent
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
-if has("autocmd")                                                          
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif                                                        
-endif
 
 " line
 inoremap <C-e> <C-o>$
@@ -282,7 +279,7 @@ catch
 endtry
 
 " Return to last edit position when opening files (You want this!)
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+" au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 " --------------------------------------
 " onedark config
