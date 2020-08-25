@@ -86,7 +86,9 @@ let g:which_key_map = {
 let g:which_key_map.f = { 
     \ 'name' : '+file',
     \ 's': ['update', 'save-file'],
-    \ 'd': 'open-init-vim'
+    \ 'd': 'open-init-vim',
+    \ 'i': 'coc organizeImport',
+    \ 'f': 'coc format file'
     \ }
 
 let g:which_key_map.w = {
@@ -484,7 +486,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " coc-go
 " +++++++++++++++++
 " Add missing imports on save
-autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.go :call CocAction('runCommand', 'editor.action.organizeImport')
 autocmd BufWritePre *.go :call CocAction('format')
 
 " Map Keys to command
@@ -499,8 +501,10 @@ autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " +++++++++++++++++
 let g:python3_host_prog = '$HOME/.pyenv/versions/3.8.2/bin/python'
 " Add missing imports on save
-autocmd BufWritePre *.py :call CocAction('runCommand', 'editor.action.organizeImport')
-autocmd BufWritePre *.py :call CocAction('format')
+" autocmd BufWritePre *.py :call CocAction('runCommand', 'editor.action.organizeImport')
+" autocmd BufWritePre *.py :call CocAction('format')
+nnoremap <leader>fi :call CocAction('runCommand', 'editor.action.organizeImport') <CR>
+nnoremap <leader>ff :call CocAction('format') <CR>
 
 
 " --------------------------------------
