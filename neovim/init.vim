@@ -136,6 +136,12 @@ let g:which_key_map['j'] = {
       \ 'F' : ['execute line(".")."!python -m json.tool"', 'format-current-raw-oneline-json'],
       \ }
 
+let g:which_key_map['l'] = {
+    \ 'name': '+coc-list',
+    \ 's': 'search workspace symbols',
+    \ 'o': 'find symbol of current document',
+    \ }
+
 nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 vnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
@@ -250,8 +256,8 @@ map <leader>bd :Bclose<cr>:tabclose<cr>gT
 " nnoremap <silent> <leader>2 :b2<CR>
 map <leader>ba :bufdo bd<cr>
 
-map <leader>l :bnext<cr>
-map <leader>h :bprevious<cr>
+"map <leader>l :bnext<cr>
+"map <leader>h :bprevious<cr>
 
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
@@ -471,9 +477,9 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " Show commands.
 " nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+nnoremap <silent> <leader>lo  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+nnoremap <silent> <leader>ls  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 " nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
