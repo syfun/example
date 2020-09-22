@@ -147,6 +147,7 @@ set clipboard=unnamed,unnamedplus
 set fileencodings=utf-8,gb2312
 set foldlevel=99
 set foldmethod=indent
+set colorcolumn=80,100
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
@@ -200,6 +201,7 @@ endif
 
 syntax on
 colorscheme onedark
+highlight Comment cterm=italic gui=italic
 " colorscheme gruvbox
 " set background=light   " Setting light mode
 
