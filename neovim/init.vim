@@ -562,10 +562,10 @@ function! s:defx_my_settings() abort
                 \ defx#is_directory() ? 
                 \ defx#do_action('open_tree') : 
                 \ defx#do_action('multi', ['drop'])
-"    nnoremap <silent><buffer><expr> E
-"                \ defx#do_action('open')
-"    nnoremap <silent><buffer><expr> P
-"                \ defx#do_action('open', 'pedit')
+    nnoremap <silent><buffer><expr> E
+                \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> P
+                \ defx#do_action('open', 'pedit')
    nnoremap <silent><buffer><expr> o
                 \ defx#is_directory() ? 
                 \ defx#do_action('open_or_close_tree') : 
@@ -613,7 +613,7 @@ function! s:defx_my_settings() abort
                 \ defx#do_action('redraw')
     nnoremap <silent><buffer><expr> <C-g>
                 \ defx#do_action('print')
-"    nnoremap <silent><buffer><expr> cd
+"    nnoremap <silent><buffer><expr> e
 "                \ defx#do_action('change_vim_cwd')
 endfunction
 
