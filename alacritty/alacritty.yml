@@ -2,8 +2,8 @@
 
 # Setup term for programs to be able to use it
 env:
-  #  TERM: alacritty
-  TERM: xterm-256color
+  TERM: alacritty
+  #TERM: xterm-256color
 
 window:
   # Spread additional padding evenly around the terminal content.
