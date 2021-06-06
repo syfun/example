@@ -66,7 +66,11 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 " https://github.com/tpope/vim-fugitive
 Plug 'tpope/vim-fugitive'
 
-" Initialize plugin system
+" https://github.com/mhinz/vim-startify
+Plug 'mhinz/vim-startify' 
+
+
+"" Initialize plugin system
 call plug#end()
 
 " ---------------------
@@ -507,13 +511,12 @@ autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " python  
 " coc-python
 " +++++++++++++++++
-let g:python3_host_prog = '$HOME/.pyenv/versions/3.8.2/bin/python'
+let g:python3_host_prog = "/usr/local/bin/python3"
 " Add missing imports on save
 " autocmd BufWritePre *.py :call CocAction('runCommand', 'editor.action.organizeImport')
 " autocmd BufWritePre *.py :call CocAction('format')
 nnoremap <leader>fi :call CocAction('runCommand', 'editor.action.organizeImport') <CR>
 nnoremap <leader>ff :call CocAction('format') <CR>
-
 
 " --------------------------------------
 " Shougo/defx.nvim
