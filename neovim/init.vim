@@ -61,7 +61,7 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'sheerun/vim-polyglot'
 
 " https://github.com/Yggdroot/LeaderF
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
+" Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " https://github.com/tpope/vim-fugitive
 Plug 'tpope/vim-fugitive'
@@ -69,7 +69,18 @@ Plug 'tpope/vim-fugitive'
 " https://github.com/mhinz/vim-startify
 Plug 'mhinz/vim-startify' 
 
+" https://github.com/JamshedVesuna/vim-markdown-preview
+" Plug 'JamshedVesuna/vim-markdown-preview'
 
+" https://github.com/nvim-telescope/telescope.nvim
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" https://github.com/lukas-reineke/indent-blankline.nvim
+" Plug 'lukas-reineke/indent-blankline.nvim'
+
+" https://github.com/nvim-treesitter/nvim-treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "" Initialize plugin system
 call plug#end()
 
@@ -192,6 +203,11 @@ while i <= 5
 endwhile
 
 inoremap jk <esc>
+
+
+" toggle search highlight 
+set hlsearch!
+nnoremap <F3> :set hlsearch!<CR>
 
  "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -663,9 +679,40 @@ map <leader>jb <Plug>(easymotion-b)
 
 
 " LeaderF
-let g:Lf_CommandMap = {'<c-j>': ['<c-n>'], '<c-k>': ['<c-p>'], '<down>': ['<c-j>'], '<up>': ['<c-k>'], '<c-p>': ['<c-l>']}
-let g:Lf_PreviewInPopup = 1
-let g:Lf_ShortcutB = "<c-e>"
-let g:Lf_ShortcutF = "<c-p>"
-let g:Lf_ShowDevIcons = 0
-let g:Lf_WindowPosition = 'popup'
+" let g:Lf_CommandMap = {'<c-j>': ['<c-n>'], '<c-k>': ['<c-p>'], '<down>': ['<c-j>'], '<up>': ['<c-k>'], '<c-p>': ['<c-l>']}
+" let g:Lf_PreviewInPopup = 1
+" let g:Lf_ShortcutB = "<c-e>"
+" let g:Lf_ShortcutF = "<c-p>"
+" let g:Lf_ShowDevIcons = 0
+" let g:Lf_WindowPosition = 'popup'
+
+" Telescope
+" Find files using Telescope command-line sugar.
+nnoremap <C-p> <cmd>Telescope find_files theme=get_dropdown hidden=true<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <C-e> <cmd>Telescope buffers theme=get_dropdown<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+
+lua << EOF
+  require'telescope'.setup {
+    defaults = {
+      file_ignore_patterns = { '.git/.*' },
+      mappings = {
+        i = {
+          ['<esc>'] = 'close',
+        },
+      },
+    },
+    pickers = {
+      buffers = {
+        previewer = false,
+        mappings = {
+          i = {
+            ['<c-d>'] = 'delete_buffer',
+          },
+        },
+      },
+    },
+  }
+EOF
