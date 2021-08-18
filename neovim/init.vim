@@ -7,23 +7,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " Make sure you use single quotes
 
-" On-demand loading
-" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-" Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
-" https://github.com/Shougo/defx.nvim
-if has('nvim')
-  Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/defx.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-" https://github.com/kristijanhusak/defx-git
-Plug 'kristijanhusak/defx-git'
-" https://github.com/kristijanhusak/defx-icons
-Plug 'kristijanhusak/defx-icons'
-
 " https://github.com/joshdick/onedark.vim
 Plug 'joshdick/onedark.vim'
 
@@ -82,7 +65,22 @@ Plug 'nvim-telescope/telescope.nvim'
 " https://github.com/nvim-treesitter/nvim-treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 "" Initialize plugin system
+
+" https://github.com/kyazdani42/nvim-web-devicons
+Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
+
+" Plug 'ryanoasis/vim-devicons' Icons without colours
+" https://github.com/akinsho/nvim-bufferline.lua
+Plug 'akinsho/nvim-bufferline.lua'
+
+" https://github.com/kyazdani42/nvim-tree.lua
+Plug 'kyazdani42/nvim-tree.lua'
+
+" https://github.com/akinsho/nvim-toggleterm.lua
+Plug 'akinsho/nvim-toggleterm.lua'
+
 call plug#end()
+
 
 " ---------------------
 " vim-which-key
@@ -161,20 +159,10 @@ nnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 vnoremap <silent> <leader>      :<c-u>WhichKey '<Space>'<CR>
 
-" --------------------------------------
-" basic config
-" --------------------------------------
-set clipboard=unnamed,unnamedplus
-set fileencodings=utf-8,gb2312
-set foldlevel=99
-set foldmethod=indent
-set colorcolumn=80,100
 
 autocmd FileType json syntax match Comment +\/\/.\+$+
 
 " line
-inoremap <C-e> <C-o>$
-inoremap <C-a> <C-o>0
 nnoremap g9 $
 
 " file related
@@ -238,38 +226,6 @@ highlight Comment cterm=italic gui=italic
 " (useful for handling the permission-denied error)
 command W w !sudo tee % > /dev/null
 
-
-" Set utf8 as standard encoding and en_US as the standard language
-set encoding=utf8
-
-" Use Unix as the standard file type
-set ffs=unix,dos,mac
-
-" Turn backup off, since most stuff is in SVN, git et.c anyway...
-set nobackup
-set nowb
-set noswapfile
-
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs ;)
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-" set autoindent
-
-" Linebreak on 500 characters
-set lbr
-set tw=500
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-
-set number
-set relativenumber
-
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
@@ -289,7 +245,6 @@ map <leader>tm :tabmove
 map <leader>t<leader> :tabnext 
 
 " Let 'tl' toggle between this and the last accessed tab
-let g:lasttab = 1
 nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
 
@@ -360,31 +315,7 @@ endfunction
 " map <Esc> to exit terminal mode
 tnoremap <Esc> <C-\><C-n>
 
-" TextEdit might fail if hidden is not set.
-set hidden
-
-" Some servers have issues with backup files, see #649.
-set nobackup
-set nowritebackup
-
-" Give more space for displaying messages.
-set cmdheight=2
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
-
 " Don't pass messages to |ins-completion-menu|.
-set shortmess+=c
-
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -527,114 +458,11 @@ autocmd FileType go nmap gtx :CocCommand go.tags.clear<cr>
 " python  
 " coc-python
 " +++++++++++++++++
-let g:python3_host_prog = "/usr/local/bin/python3"
 " Add missing imports on save
 " autocmd BufWritePre *.py :call CocAction('runCommand', 'editor.action.organizeImport')
 " autocmd BufWritePre *.py :call CocAction('format')
 nnoremap <leader>fi :call CocAction('runCommand', 'editor.action.organizeImport') <CR>
 nnoremap <leader>ff :call CocAction('format') <CR>
-
-" --------------------------------------
-" Shougo/defx.nvim
-" --------------------------------------
-nmap <silent> <Leader>e :Defx <cr>
-
-let g:maplocalleader=';'
-nnoremap <silent> <LocalLeader>e
-            \ :<C-u>Defx -resume -toggle -buffer-name=tab`tabpagenr()` <CR>
-nnoremap <silent> <LocalLeader>a
-            \ :<C-u>Defx -resume -buffer-name=tab`tabpagenr()` -search=`expand('%:p')`<CR>
-
-call defx#custom#option('_', {
-            \ 'columns': 'indent:git:icons:filename',
-            \ 'winwidth': 35,
-            \ 'split': 'vertical',
-            \ 'direction': 'topleft',
-            \ 'show_ignored_files': 0,
-            \ 'root_marker': '≡ ',
-            \ 'ignored_files':
-            \     '.mypy_cache,.pytest_cache,.git,.hg,.svn,.stversions'
-            \   . ',__pycache__,.sass-cache,*.egg-info,.DS_Store,*.pyc,*.swp'
-            \   . ',.idea'
-            \ })
-
-autocmd FileType defx call s:defx_my_settings()
-function! s:defx_my_settings() abort
-    " Define mappings
-    nnoremap <silent><buffer><expr> <CR>
-                \ defx#is_directory() ? 
-                \ defx#do_action('open_tree') : 
-                \ defx#do_action('multi', ['drop'])
-    nnoremap <silent><buffer><expr> s
-                \ defx#do_action('multi', [['drop', 'split']])
-    nnoremap <silent><buffer><expr> v
-                \ defx#do_action('multi', [['drop', 'vsplit']])
-    nnoremap <silent><buffer><expr> c
-                \ defx#do_action('copy')
-    nnorema <silent><buffer><expr> m
-                \ defx#do_action('move')
-    nnoremap <silent><buffer><expr> p
-                \ defx#do_action('paste')
-    nnoremap <silent><buffer><expr> i
-                \ defx#do_action('multi',[['drop','split']])
-    nnoremap <silent><buffer><expr> l
-                \ defx#is_directory() ? 
-                \ defx#do_action('open_tree') : 
-                \ defx#do_action('multi', ['drop'])
-    nnoremap <silent><buffer><expr> E
-                \ defx#do_action('open')
-    nnoremap <silent><buffer><expr> P
-                \ defx#do_action('open', 'pedit')
-   nnoremap <silent><buffer><expr> o
-                \ defx#is_directory() ? 
-                \ defx#do_action('open_or_close_tree') : 
-                \ defx#do_action('multi', ['drop'])
-    nnoremap <silent><buffer><expr> K
-                \ defx#do_action('new_directory')
-    nnoremap <silent><buffer><expr> N
-                \ defx#do_action('new_file')
-"    nnoremap <silent><buffer><expr> M
-"                \ defx#do_action('new_multiple_files')
-    nnoremap <silent><buffer><expr> C
-                \ defx#do_action('toggle_columns',
-                \                'mark:indent:icon:filename:type:size:time')
-"    nnoremap <silent><buffer><expr> S
-"                \ defx#do_action('toggle_sort', 'time')
-    nnoremap <silent><buffer><expr> d
-                \ defx#do_action('remove')
-    nnoremap <silent><buffer><expr> r
-                \ defx#do_action('rename')
-"    nnoremap <silent><buffer><expr> !
-"                \ defx#do_action('execute_command')
-    nnoremap <silent><buffer><expr> x
-                \ defx#do_action('close_tree')
-   nnoremap <silent><buffer><expr> yy
-               \ defx#do_action('yank_path')
-"    nnoremap <silent><buffer><expr> .
-"                \ defx#do_action('toggle_ignored_files')
-"    nnoremap <silent><buffer><expr> ;
-"                \ defx#do_action('repeat')
-    nnoremap <silent><buffer><expr> h
-                \ defx#do_action('cd', ['..'])
-    nnoremap <silent><buffer><expr> ~
-                \ defx#do_action('cd')
-    nnoremap <silent><buffer><expr> q
-                \ defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <Space>
-                \ defx#do_action('toggle_select') . 'j'
-    nnoremap <silent><buffer><expr> *
-                \ defx#do_action('toggle_select_all')
-    nnoremap <silent><buffer><expr> j
-                \ line('.') == line('$') ? 'gg' : 'j'
-    nnoremap <silent><buffer><expr> k
-                \ line('.') == 1 ? 'G' : 'k'
-    nnoremap <silent><buffer><expr> <C-l>
-                \ defx#do_action('redraw')
-    nnoremap <silent><buffer><expr> <C-g>
-                \ defx#do_action('print')
-"    nnoremap <silent><buffer><expr> e
-"                \ defx#do_action('change_vim_cwd')
-endfunction
 
 " --------------------------------------
 " surround.vim config
@@ -678,41 +506,5 @@ map <leader>jw <Plug>(easymotion-w)
 map <leader>jb <Plug>(easymotion-b)
 
 
-" LeaderF
-" let g:Lf_CommandMap = {'<c-j>': ['<c-n>'], '<c-k>': ['<c-p>'], '<down>': ['<c-j>'], '<up>': ['<c-k>'], '<c-p>': ['<c-l>']}
-" let g:Lf_PreviewInPopup = 1
-" let g:Lf_ShortcutB = "<c-e>"
-" let g:Lf_ShortcutF = "<c-p>"
-" let g:Lf_ShowDevIcons = 0
-" let g:Lf_WindowPosition = 'popup'
+lua require('init')
 
-" Telescope
-" Find files using Telescope command-line sugar.
-nnoremap <C-p> <cmd>Telescope find_files theme=get_dropdown hidden=true<cr>
-nnoremap <leader>fg <cmd>Telescope live_grep<cr>
-nnoremap <C-e> <cmd>Telescope buffers theme=get_dropdown<cr>
-nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-
-
-lua << EOF
-  require'telescope'.setup {
-    defaults = {
-      file_ignore_patterns = { '.git/.*' },
-      mappings = {
-        i = {
-          ['<esc>'] = 'close',
-        },
-      },
-    },
-    pickers = {
-      buffers = {
-        previewer = false,
-        mappings = {
-          i = {
-            ['<c-d>'] = 'delete_buffer',
-          },
-        },
-      },
-    },
-  }
-EOF
