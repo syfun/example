@@ -1,3 +1,4 @@
 {
-    "pyright.organizeimports.provider": "isort"
+    "pyright.organizeimports.provider": "isort",
+    "python.formatting.provider": "black"
 }

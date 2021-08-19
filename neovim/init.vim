@@ -14,7 +14,10 @@ Plug 'joshdick/onedark.vim'
 " Plug 'morhetz/gruvbox'
 
 " https://github.com/itchyny/lightline.vim
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+
+" https://github.com/glepnir/galaxyline.nvim
+Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 
 " https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
@@ -178,17 +181,17 @@ nnoremap <silent> q  :<c-u>q<CR>
 nnoremap <silent> qa  :<c-u>qall!<CR>
 
 " move to window by number
-let i = 1
-while i <= 8
-    execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
-    let i = i + 1
-endwhile
-
-let i = 1
-while i <= 5
-    execute 'nnoremap t' . i . ' :' . i . 'tabn<CR>'
-    let i = i + 1
-endwhile
+" let i = 1
+" while i <= 8
+"     execute 'nnoremap <Leader>' . i . ' :' . i . 'wincmd w<CR>'
+"     let i = i + 1
+" endwhile
+"
+" let i = 1
+" while i <= 5
+"     execute 'nnoremap t' . i . ' :' . i . 'tabn<CR>'
+"     let i = i + 1
+" endwhile
 
 inoremap jk <esc>
 
@@ -274,32 +277,32 @@ let g:onedark_hide_endofbuffer = 1
 " --------------------------------------
 " lightline config
 " --------------------------------------
-function! CocCurrentFunction()
-    return get(b:, 'coc_current_function', '')
-endfunction
-
-
-function! WindowNumber()
-    let str=tabpagewinnr(tabpagenr())
-    return str
-endfunction
-
-let g:lightline = {
-      \ 'colorscheme': 'onedark',
-      \ 'active': {
-      \   'left': [ [ 'winnumber', 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'inactive': {
-      \   'left': [ [ 'winnumber', 'mode'] ]
-      \},
-      \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction',
-      \   'winnumber': 'WindowNumber'
-      \ },
-      \ }
-
+" function! CocCurrentFunction()
+"     return get(b:, 'coc_current_function', '')
+" endfunction
+"
+"
+" function! WindowNumber()
+"     let str=tabpagewinnr(tabpagenr())
+"     return str
+" endfunction
+"
+" let g:lightline = {
+"       \ 'colorscheme': 'onedark',
+"       \ 'active': {
+"       \   'left': [ [ 'winnumber', 'mode', 'paste' ],
+"       \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'inactive': {
+"       \   'left': [ [ 'winnumber', 'mode'] ]
+"       \},
+"       \ 'component_function': {
+"       \   'cocstatus': 'coc#status',
+"       \   'currentfunction': 'CocCurrentFunction',
+"       \   'winnumber': 'WindowNumber'
+"       \ },
+"       \ }
+"
 " --------------------------------------
 " coc.nvim config
 " --------------------------------------

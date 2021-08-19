@@ -10,7 +10,7 @@ local opt = {}
 
 -- basic
 map("n", "<leader>fs", ":update<CR>")
-map("n", "<leader>fd", "<leader>fd :e $HOME/.config/nvim/init.vim<CR>")
+map("n", "<leader>fd", ":e $HOME/.config/nvim/init.vim<CR>")
 
 -- navigation within insert mode
 map("i", "<C-l>", "<Right>", opt)
