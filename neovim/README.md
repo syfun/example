@@ -17,22 +17,16 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 
 ## 食用配置
 
-拷贝`init.vim`到`~/.config/nvim/init.vim`
 
-或者
-
-`ln -s $(pwd)/init.vim ~/.config/nvim/init.vim`
+`ln -s $(pwd)/neovim ~/.config/nvim`
 
 
 ## 安装插件
 
 `nvim`命令打开后执行`:PlugInstall`
 
-## defx
 
-`let g:python3_host_prog = '$HOME/.pyenv/shims/python3`
-
-defx-icons乱码问题解决：
+乱码问题解决：
 
 1. 安装[nerd-fonts](https://github.com/ryanoasis/nerd-fonts)
 
@@ -43,26 +37,6 @@ brew cask install font-hack-nerd-font
 
 2. iterm2设置non-ascii字体
 
-## coc
-
-plugins:
-- coc-pyright
-- coc-json
--
-
-settings:
-
-```json
-{
-    "python.formatting.provider": "black",
-    "python.formatting.blackPath": "/usr/local/bin/black",
-    "python.formatting.blackArgs": [
-        "-S",
-        "-l 100"
-    ],
-    "pyright.organizeimports.provider": "isort"
-}
-```
 
 pyproject.toml
 
