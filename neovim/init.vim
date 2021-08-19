@@ -23,7 +23,7 @@ Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'tpope/vim-surround'
 
 " Language server protocol support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " https://github.com/jparise/vim-graphql
 Plug 'jparise/vim-graphql'
@@ -81,6 +81,11 @@ Plug 'kyazdani42/nvim-tree.lua'
 
 " https://github.com/akinsho/nvim-toggleterm.lua
 Plug 'akinsho/nvim-toggleterm.lua'
+
+Plug 'neovim/nvim-lspconfig'
+Plug 'kabouzeid/nvim-lspinstall'
+
+" Plug 'onsails/lspkind-nvim'
 
 call plug#end()
 
