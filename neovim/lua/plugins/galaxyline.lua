@@ -13,6 +13,16 @@ local right_separator = " " -- or ""
 
 local colors = require "themes/onedark"
 
+local function get_coc_lsp()
+   local status = vim.fn["coc#status"]()
+   if not status or status == "" then
+      return ""
+   end
+   return status
+end
+
+CocStatus = get_coc_lsp
+
 gls.left[1] = {
    FirstElement = {
       provider = function()
@@ -44,8 +54,7 @@ gls.left[3] = {
 gls.left[4] = {
    FileName = {
       provider = function()
-         local fileinfo = require "galaxyline.provider_fileinfo"
-         return fileinfo.get_current_file_name("", "")
+         return vim.fn.expand "%:F"
       end,
       condition = condition.buffer_not_empty,
       highlight = { colors.white, colors.lightbg },
@@ -101,19 +110,10 @@ gls.left[8] = {
    },
 }
 
-gls.left[9] = {
-   DiagnosticError = {
-      provider = "DiagnosticError",
-      icon = "  ",
-      highlight = { colors.red, colors.statusline_bg },
-   },
-}
-
 gls.left[10] = {
-   DiagnosticWarn = {
-      provider = "DiagnosticWarn",
-      icon = "  ",
-      highlight = { colors.yellow, colors.statusline_bg },
+   CocStatus = {
+      provider = CocStatus,
+      highlight = { colors.green, colors.bg },
    },
 }
 
