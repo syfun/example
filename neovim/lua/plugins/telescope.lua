@@ -19,7 +19,7 @@ telescope.setup {
       entry_prefix = "  ",
       initial_mode = "insert",
       selection_strategy = "reset",
-      sorting_strategy = "descending",
+      sorting_strategy = "ascending",
       layout_strategy = "horizontal",
       layout_config = {
          horizontal = {
@@ -35,7 +35,10 @@ telescope.setup {
          preview_cutoff = 120,
       },
       file_sorter = require("telescope.sorters").get_fuzzy_file,
-      file_ignore_patterns = {},
+      file_ignore_patterns = {
+         ".git/.*",
+         ".*.pyc",
+      },
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
       path_display = { "absolute" },
       winblend = 0,
