@@ -38,6 +38,8 @@ telescope.setup {
       file_ignore_patterns = {
          ".git/.*",
          ".*.pyc",
+         ".idea/.*",
+         ".*__pycache__/.*"
       },
       generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
       path_display = { "absolute" },

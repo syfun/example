@@ -4,6 +4,7 @@ if not (present1 or present2) then
 	return
 end
 
+
 local function on_attach(client, bufnr)
 	-- require("completion").on_attach()
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -38,10 +39,38 @@ local function on_attach(client, bufnr)
 	-- elseif client.resolved_capabilities.document_range_formatting then
 	-- 	buf_set_keymap("n", "<leader>ff", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
 	-- end
+    local icons = {
+      Class = " ",
+      Color = " ",
+      Constant = " ",
+      Constructor = " ",
+      Enum = "了 ",
+      EnumMember = " ",
+      Field = " ",
+      File = " ",
+      Folder = " ",
+      Function = " ",
+      Interface = "ﰮ ",
+      Keyword = " ",
+      Method = "ƒ ",
+      Module = " ",
+      Property = " ",
+      Snippet = "﬌ ",
+      Struct = " ",
+      Text = " ",
+      Unit = " ",
+      Value = " ",
+      Variable = " ",
+    }
+
+    local kinds = vim.lsp.protocol.CompletionItemKind
+    for i, kind in ipairs(kinds) do
+      kinds[i] = icons[kind] or kind
+    end
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.textDocument.completion.completionItem.snippetSupport = true
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 -- lspInstall + lspconfig stuff
 
@@ -50,16 +79,15 @@ local function setup_servers()
 	local servers = lspinstall.installed_servers()
 
 	for _, lang in pairs(servers) do
-		if lang == "python" then
-			lspconfig[lang].setup({
-				on_attach = on_attach,
-				capabilities = capabilities,
-				root_dir = vim.loop.cwd,
-				settings = {
-					pyright = {},
-				},
-			})
-		elseif lang == "lua" then
+		-- if lang == "python" then
+		--     lspconfig[lang].setup({
+		--         on_attach = on_attach,
+		--         root_dir = vim.loop.cwd,
+		--         settings = {
+		--             pyright = {},
+		--         },
+		--     })
+		if lang == "lua" then
 			lspconfig[lang].setup({
 				root_dir = vim.loop.cwd,
 				settings = {
@@ -84,12 +112,12 @@ local function setup_servers()
 		else
 			lspconfig[lang].setup({
 				on_attach = on_attach,
-				capabilities = capabilities,
 				root_dir = vim.loop.cwd,
 			})
 		end
 	end
 end
+
 
 setup_servers()
 
@@ -135,3 +163,5 @@ end
 -- require("lspsaga").init_lsp_saga()
 
 -- require("lspkind").init()
+
+
