@@ -8,5 +8,7 @@ require("plugins.treesitter")
 require("plugins.galaxyline")
 require("plugins.lsp")
 require("plugins.others")
+-- require("plugins.trouble")
+-- require("plugins.dap")
 
 require("mappings")

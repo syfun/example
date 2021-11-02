@@ -27,14 +27,14 @@ map("n", "<leader>e", ":NvimTreeToggle<CR>", opt)
 
 -- -------toggleterm-------
 -- Open terminals
-map("n", "<leader>w", ":lua termW:toggle() <CR>", opt)
-map("n", "<leader>v", ":lua termV:toggle() <CR>", opt)
-map("n", "<leader>h", ":lua termH:toggle() <CR>", opt)
+map("n", "<leader>g", ":lua termGit:toggle() <CR>", opt)
+-- map("n", "<leader>v", ":lua termV:toggle() <CR>", opt)
+-- map("n", "<leader>h", ":lua termH:toggle() <CR>", opt)
 
 -- toggle(HIDE) a term from within terminal edit mode
 map("t", "JK", "<C-\\><C-n> :ToggleTerm <CR>", opt)
-map("t", "JK", "<C-\\><C-n> :ToggleTerm <CR>", opt)
-map("t", "JK", "<C-\\><C-n> :ToggleTerm <CR>", opt)
+-- map("t", "JK", "<C-\\><C-n> :ToggleTerm <CR>", opt)
+-- map("t", "JK", "<C-\\><C-n> :ToggleTerm <CR>", opt)
 -- -------toggleterm-------
 
 -- -------bufferline-------
@@ -62,3 +62,12 @@ map("n", "<leader>th", ":Telescope themes<CR>", opt)
 -- -------neoforamt-------
 map("n", "<leader>ff", ":Neoformat<CR>", opt)
 -- -----neoforamt-------
+
+-- -------trouble-------
+map("n", "<leader>xx", "<cmd>Trouble<cr>", opt)
+map("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>", opt)
+map("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>", opt)
+map("n", "<leader>xl", "<cmd>Trouble loclist<cr>", opt)
+map("n", "<leader>xq", "<cmd>Trouble quickfix<cr>", opt)
+map("n", "<leader>gR", "<cmd>Trouble lsp_references<cr>", opt)
+-- -----trouble-------

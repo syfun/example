@@ -66,6 +66,9 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 " https://github.com/kyazdani42/nvim-web-devicons
 Plug 'kyazdani42/nvim-web-devicons' " Recommended (for coloured icons)
 
+" https://github.com/folke/trouble.nvim
+" Plug 'folke/trouble.nvim'
+
 " Plug 'ryanoasis/vim-devicons' Icons without colours
 " https://github.com/akinsho/nvim-bufferline.lua
 Plug 'akinsho/nvim-bufferline.lua'
@@ -91,6 +94,11 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 
 " https://github.com/sbdchd/neoformat
 Plug 'sbdchd/neoformat'
+
+" https://github.com/mfussenegger/nvim-dap
+"Plug 'mfussenegger/nvim-dap'
+"Plug 'rcarriga/nvim-dap-ui'
+
 call plug#end()
 
 let mapleader = " "
