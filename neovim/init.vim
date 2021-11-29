@@ -80,7 +80,8 @@ Plug 'kyazdani42/nvim-tree.lua'
 Plug 'akinsho/nvim-toggleterm.lua'
 
 Plug 'neovim/nvim-lspconfig'
-Plug 'kabouzeid/nvim-lspinstall'
+" Plug 'kabouzeid/nvim-lspinstall'
+Plug 'williamboman/nvim-lsp-installer'
 
 " https://github.com/nvim-lua/completion-nvim
 " Plug 'nvim-lua/completion-nvim'
