@@ -17,7 +17,10 @@ Plug 'joshdick/onedark.vim'
 " Plug 'itchyny/lightline.vim'
 
 " https://github.com/glepnir/galaxyline.nvim
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+
+" https://github.com/nvim-lualine/lualine.nvim
+Plug 'nvim-lualine/lualine.nvim'
 
 " https://github.com/tpope/vim-surround
 Plug 'tpope/vim-surround'
@@ -79,22 +82,31 @@ Plug 'kyazdani42/nvim-tree.lua'
 " https://github.com/akinsho/nvim-toggleterm.lua
 Plug 'akinsho/nvim-toggleterm.lua'
 
+" https://github.com/neovim/nvim-lspconfig
+" Collection of configurations for built-in LSP client
 Plug 'neovim/nvim-lspconfig'
-" Plug 'kabouzeid/nvim-lspinstall'
-Plug 'williamboman/nvim-lsp-installer'
 
-" https://github.com/nvim-lua/completion-nvim
-" Plug 'nvim-lua/completion-nvim'
+" https://github.com/hrsh7th/nvim-cmp
+" Autocompletion plugin
+Plug 'hrsh7th/nvim-cmp'
 
-" https://github.com/hrsh7th/nvim-compe
-Plug 'hrsh7th/nvim-compe'
-" Plug 'onsails/lspkind-nvim'
+" https://github.com/hrsh7th/cmp-nvim-lsp
+" LSP source for nvim-cmp
+Plug 'hrsh7th/cmp-nvim-lsp'
+
+" https://github.com/saadparwaiz1/cmp_luasnip
+" Snippets source for nvim-cmp
+Plug 'saadparwaiz1/cmp_luasnip'
+
+" https://github.com/L3MON4D3/LuaSnip
+" Snippets plugin
+Plug 'L3MON4D3/LuaSnip'
 
 " https://github.com/lukas-reineke/indent-blankline.nvim
 Plug 'lukas-reineke/indent-blankline.nvim'
 
 " https://github.com/sbdchd/neoformat
-Plug 'sbdchd/neoformat'
+" Plug 'sbdchd/neoformat'
 
 " https://github.com/mfussenegger/nvim-dap
 "Plug 'mfussenegger/nvim-dap'
@@ -241,10 +253,6 @@ map <leader>jb <Plug>(easymotion-b)
 
 
 lua require('init')
-
-" for nvim-compe
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 " for neoformat
 let g:neoformat_enabled_python = ['black', 'isort']
