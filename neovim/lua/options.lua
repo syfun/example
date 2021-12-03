@@ -62,7 +62,9 @@ end
 
 -- Don't show status line on certain windows
 vim.cmd([[ au TermOpen term://* setlocal nonumber norelativenumber ]])
-vim.cmd([[let hidden_statusline =[ "NvimTree", "toggleterm" ] | autocmd BufEnter,BufWinEnter,WinEnter,CmdwinEnter,TermEnter * nested if index(hidden_statusline, &ft) >= 0 | set laststatus=0 | else | set laststatus=2 | endif]])
+vim.cmd(
+	[[let hidden_statusline =[ "NvimTree", "toggleterm" ] | autocmd BufEnter,BufWinEnter,WinEnter,CmdwinEnter,TermEnter * nested if index(hidden_statusline, &ft) >= 0 | set laststatus=0 | else | set laststatus=2 | endif]]
+)
 
 -- Open a file from its last left off position
 -- vim.cmd [[ au BufReadPost * if expand('%:p') !~# '\m/\.git/' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif ]]
@@ -70,4 +72,4 @@ vim.cmd([[let hidden_statusline =[ "NvimTree", "toggleterm" ] | autocmd BufEnter
 -- vim.cmd [[ autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4 softtabstop=4 ]]
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menuone,noselect'
+vim.o.completeopt = "menuone,noselect"

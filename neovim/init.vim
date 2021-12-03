@@ -112,6 +112,10 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 "Plug 'mfussenegger/nvim-dap'
 "Plug 'rcarriga/nvim-dap-ui'
 
+" https://github.com/f-person/git-blame.nvim
+Plug 'f-person/git-blame.nvim'
+
+
 call plug#end()
 
 let mapleader = " "
@@ -257,3 +261,6 @@ lua require('init')
 " for neoformat
 let g:neoformat_enabled_python = ['black', 'isort']
 let g:neoformat_run_all_formatters = 1
+
+" for git blame
+let g:gitblame_enabled = 0

@@ -49,3 +49,7 @@ skip-string-normalization = true
 profile = "black"
 multi_line_output = 3
 ```
+
+## telescope
+
+[telescope](https://github.com/nvim-telescope/telescope.nvim)需要额外安装一些东西。
